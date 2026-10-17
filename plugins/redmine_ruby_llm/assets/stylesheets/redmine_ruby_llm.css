@@ -1,0 +1,20 @@
+.llm-messages .llm-message {
+  margin-bottom: 1em;
+}
+
+.llm-message-user {
+  border-left: 3px solid #507aaa;
+}
+
+.llm-message-assistant {
+  border-left: 3px solid #82bc71;
+}
+
+.llm-issue-assistant {
+  margin: 0.5em 0;
+}
+
+.llm-issue-summary {
+  margin-top: 1em;
+  clear: both;
+}

@@ -1,0 +1,35 @@
+<div class="contextual">
+  <%= link_to l(:label_llm_chats), project_llm_chats_path(@project), class: 'icon icon-list' %>
+  <% if User.current.allowed_to?(:manage_llm_chats, @project) %>
+    <%= link_to l(:button_delete), project_llm_chat_path(@project, @chat),
+                method: :delete,
+                data: {confirm: l(:text_are_you_sure)},
+                class: 'icon icon-del' %>
+  <% end %>
+</div>
+
+<h2><%= @chat.display_title %></h2>
+
+<div class="llm-messages">
+  <% @messages.each do |message| %>
+    <div class="box llm-message llm-message-<%= message.role %>">
+      <p><strong><%= l(:"label_llm_role_#{message.role}", default: message.role.to_s.humanize) %></strong>
+         <em class="info"><%= format_time(message.created_at) %></em></p>
+      <div class="wiki">
+        <%= textilizable(message.content.to_s) %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if User.current.allowed_to?(:manage_llm_chats, @project) %>
+  <%= form_tag project_llm_chat_llm_messages_path(@project, @chat), method: :post do %>
+    <div class="box tabular">
+      <p>
+        <%= label_tag :content, l(:label_llm_message) %>
+        <%= text_area_tag :content, nil, rows: 6, cols: 60, class: 'wiki-edit', required: true %>
+      </p>
+    </div>
+    <p><%= submit_tag l(:button_submit) %></p>
+  <% end %>
+<% end %>

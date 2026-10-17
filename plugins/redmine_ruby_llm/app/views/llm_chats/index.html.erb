@@ -1,0 +1,46 @@
+<div class="contextual">
+  <% if User.current.allowed_to?(:manage_llm_chats, @project) && RedmineRubyLlm.configured? %>
+    <%= link_to l(:label_llm_chat_new), new_project_llm_chat_path(@project), class: 'icon icon-add' %>
+  <% end %>
+</div>
+
+<h2><%= l(:label_llm_chats) %></h2>
+
+<% unless RedmineRubyLlm.configured? %>
+  <p class="nodata"><%= l(:error_llm_not_configured) %></p>
+<% end %>
+
+<% if @chats.empty? %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% else %>
+  <div class="autoscroll">
+    <table class="list">
+      <thead>
+        <tr>
+          <%= sort_header_tag('title', caption: l(:field_title)) %>
+          <th><%= l(:field_author) %></th>
+          <%= sort_header_tag('updated_at', caption: l(:field_updated_on)) %>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @chats.each do |chat| %>
+          <tr>
+            <td><%= link_to chat.display_title, project_llm_chat_path(@project, chat) %></td>
+            <td><%= link_to_user chat.user %></td>
+            <td><%= format_time(chat.updated_at) %></td>
+            <td class="buttons">
+              <% if User.current.allowed_to?(:manage_llm_chats, @project) %>
+                <%= link_to l(:button_delete), project_llm_chat_path(@project, chat),
+                            method: :delete,
+                            data: {confirm: l(:text_are_you_sure)},
+                            class: 'icon icon-del' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <span class="pagination"><%= pagination_links_full @chat_pages, @chat_count %></span>
+<% end %>

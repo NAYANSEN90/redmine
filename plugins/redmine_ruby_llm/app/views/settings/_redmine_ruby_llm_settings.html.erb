@@ -1,0 +1,27 @@
+<p>
+  <label for="settings_openai_api_key"><%= l(:label_llm_openai_api_key) %></label>
+  <%= text_field_tag 'settings[openai_api_key]', @settings['openai_api_key'], id: 'settings_openai_api_key', size: 60, autocomplete: 'off' %>
+  <em class="info"><%= l(:text_llm_env_override, env: 'OPENAI_API_KEY') %></em>
+</p>
+
+<p>
+  <label for="settings_openai_api_base"><%= l(:label_llm_openai_api_base) %></label>
+  <%= text_field_tag 'settings[openai_api_base]', @settings['openai_api_base'], id: 'settings_openai_api_base', size: 60 %>
+  <em class="info"><%= l(:text_llm_openai_api_base_info) %></em>
+</p>
+
+<p>
+  <label for="settings_anthropic_api_key"><%= l(:label_llm_anthropic_api_key) %></label>
+  <%= text_field_tag 'settings[anthropic_api_key]', @settings['anthropic_api_key'], id: 'settings_anthropic_api_key', size: 60, autocomplete: 'off' %>
+  <em class="info"><%= l(:text_llm_env_override, env: 'ANTHROPIC_API_KEY') %></em>
+</p>
+
+<p>
+  <label for="settings_default_model"><%= l(:label_llm_default_model) %></label>
+  <%= text_field_tag 'settings[default_model]', @settings['default_model'], id: 'settings_default_model', size: 40 %>
+</p>
+
+<p>
+  <label for="settings_issue_assistant_instructions"><%= l(:label_llm_issue_assistant_instructions) %></label>
+  <%= text_area_tag 'settings[issue_assistant_instructions]', @settings['issue_assistant_instructions'], id: 'settings_issue_assistant_instructions', rows: 6, cols: 60, class: 'wiki-edit' %>
+</p>

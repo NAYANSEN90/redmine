@@ -1,0 +1,41 @@
+= RubyLLM plugin for Redmine
+
+Integrates {RubyLLM}[https://rubyllm.com] so Redmine projects can run
+persisted AI chats and summarize issues with a configured LLM provider.
+
+== Features
+
+* Admin settings for OpenAI / Anthropic API keys and default model
+* Project module with persisted AI chats (RubyLLM +acts_as_chat+)
+* Issue page action to generate an AI summary
+* ENV overrides: +OPENAI_API_KEY+, +OPENAI_API_BASE+, +ANTHROPIC_API_KEY+
+
+Active Storage is not required. Redmine already manages attachments separately;
+this first integration focuses on text chats and issue summaries.
+
+== Installation
+
+1. Ensure the plugin is under +plugins/redmine_ruby_llm+
+2. Install gems::
+     bundle install
+3. Migrate the plugin::
+     bin/rake redmine:plugins:migrate NAME=redmine_ruby_llm
+4. Load the model registry::
+     bin/rake redmine_ruby_llm:load_models
+5. Restart Redmine
+6. Configure API keys under Administration → Plugins → RubyLLM
+7. Enable the RubyLLM module on a project and grant permissions to roles
+
+== Permissions
+
+* View AI chats
+* Manage AI chats
+* Use AI issue assistant
+
+== Notes
+
+* Chat and message models are named +LlmChat+ / +LlmMessage+ so they do not
+  collide with Redmine’s forum +Message+ model.
+* Provider credentials can live in plugin settings or environment variables.
+* Streaming Hotwire UI from +ruby_llm:chat_ui+ is not wired yet; chats use
+  classic form posts that fit Redmine’s Stimulus setup without Turbo.

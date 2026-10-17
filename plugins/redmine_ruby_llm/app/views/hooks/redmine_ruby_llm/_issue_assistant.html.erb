@@ -1,0 +1,18 @@
+<% if User.current.allowed_to?(:use_llm_issue_assistant, issue.project) %>
+  <div class="llm-issue-assistant contextual">
+    <%= button_to l(:button_llm_summarize_issue),
+                  issue_llm_issue_assistant_path(issue),
+                  method: :post,
+                  class: 'button',
+                  data: {confirm: l(:text_llm_summarize_confirm)} %>
+  </div>
+
+  <% if flash[:llm_issue_summary].present? %>
+    <div class="llm-issue-summary box">
+      <h4><%= l(:label_llm_issue_summary) %></h4>
+      <div class="wiki">
+        <%= textilizable(flash[:llm_issue_summary]) %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

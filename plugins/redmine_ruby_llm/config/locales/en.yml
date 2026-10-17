@@ -1,0 +1,26 @@
+en:
+  label_llm_chats: AI chats
+  label_llm_chat_new: New AI chat
+  label_llm_first_message: First message
+  label_llm_message: Message
+  label_llm_issue_summary: AI summary
+  label_llm_openai_api_key: OpenAI API key
+  label_llm_openai_api_base: OpenAI API base URL
+  label_llm_anthropic_api_key: Anthropic API key
+  label_llm_default_model: Default model
+  label_llm_issue_assistant_instructions: Issue assistant instructions
+  label_llm_role_user: You
+  label_llm_role_assistant: Assistant
+  label_llm_role_system: System
+  label_module_ruby_llm: RubyLLM
+  button_llm_summarize_issue: Summarize with AI
+  permission_view_llm_chats: View AI chats
+  permission_manage_llm_chats: Manage AI chats
+  permission_use_llm_issue_assistant: Use AI issue assistant
+  error_llm_not_configured: RubyLLM is not configured. An administrator must set an API key under Administration → Plugins → RubyLLM, or set OPENAI_API_KEY / ANTHROPIC_API_KEY.
+  error_llm_message_blank: Message cannot be blank.
+  notice_llm_issue_summary_ready: AI summary generated.
+  text_llm_env_override: "Environment variable %{env} overrides this setting when present."
+  text_llm_openai_api_base_info: Optional. Use for OpenAI-compatible endpoints (Ollama, vLLM, LiteLLM, etc.).
+  text_llm_summarize_confirm: Generate an AI summary of this issue? This sends issue content to the configured LLM provider.
+  project_module_ruby_llm: RubyLLM
